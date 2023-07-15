@@ -62,17 +62,17 @@ function App() {
           <Slide direction="right" timeout={900} in={!loading}>
             <div className="box_container">
               <div className="box">
-                <p>Humidity</p>
+                <p>Humidité</p>
                 <h1>{data.main.humidity.toFixed()}%</h1>
               </div>
 
               <div className="box">
-                <p>Wind</p>
+                <p>Vent</p>
                 <h1>{data.wind.speed.toFixed()}km/h</h1>
               </div>
 
               <div className="box">
-                <p>Feels Like</p>
+                <p>Ressenti</p>
                 <h1>{data.main.feels_like.toFixed()}°C</h1>
               </div>
             </div>
