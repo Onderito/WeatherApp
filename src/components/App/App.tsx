@@ -3,10 +3,27 @@ import { TextField, Slide, CircularProgress } from '@mui/material';
 
 import './App.scss';
 
+interface WeatherData {
+  name: string;
+  weather: {
+    main: string;
+    icon: string;
+  }[];
+  main: {
+    temp: number;
+    humidity: number;
+    feels_like: number;
+  };
+
+  wind: {
+    speed: number;
+  };
+}
+
 function App() {
   const [cityName, setNameCity] = useState('Paris');
   const [inputText, setInputText] = useState('');
-  const [data, setData] = useState({});
+  const [data, setData] = useState<WeatherData>({} as WeatherData);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -22,16 +39,17 @@ function App() {
           throw new Error('Erreur, Oups');
         }
       })
-      .then((responseData) => {
+      .then((responseData: WeatherData) => {
         setData(responseData);
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
   }, [cityName, error]);
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      setNameCity(e.target.value);
+      const inputElement = e.target as HTMLInputElement;
+      setNameCity(inputElement.value);
       setInputText('');
     }
   };
